@@ -7,11 +7,8 @@ Bundler.require
 set :root, File.expand_path(File.join(File.dirname(__FILE__), '..'))
 set :app_file, File.expand_path(File.join(Sinatra::Application.root, 'jumbo.rb'))
 set :views, File.expand_path(File.join(Sinatra::Application.root, 'app', 'views'))
-p "setting views to #{File.expand_path(File.join(Sinatra::Application.root, 'app', 'views'))}"
 set :public, 'public'
 set :haml, :format => :html5
-
-p "set views to #{Sinatra::Application.views}"
 
 # Configure Compass
 configure do

@@ -22,7 +22,6 @@ class Jumbo < Sinatra::Base
   end
   
   get '/' do
-    p " going  to #{Sinatra::Application.views}"
     haml :index, :layout => :'layouts/application'
   end
 end

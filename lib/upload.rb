@@ -1,11 +1,12 @@
 require 'sinatra/base'
 require 'base64'
+require 'faye'
 
 class JumboUpload < Sinatra::Base
+  attr_accessor :faye_server
+  
   post '/upload' do
     content_type :json
-    
-    p "incoming params #{params.to_yaml}"
     
     if params[:file]
       tmpfile = params[:file][:tempfile]
@@ -22,11 +23,9 @@ class JumboUpload < Sinatra::Base
 
     attrs = { :name => params[:file][:filename], :type => params[:file][:type], :size => block.length }
 
-    
-    client = Faye::Client.new('http://localhost:9292/faye')
-    EM.run do
-      client.publish('/files', { :data => "data:#{attrs[:type]};base64,#{block_64}" }.merge(attrs))
-    end
+    env['faye.client'].publish('/files', attrs.merge({
+      :data => "data:#{attrs[:type]};base64,#{block_64}"
+    }))
     
     attrs.to_json
   end
