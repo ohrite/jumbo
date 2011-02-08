@@ -1,7 +1,7 @@
 require 'sinatra/base'
 
 class Jumbo < Sinatra::Base
-  use JumboLogin
+  #use JumboLogin
   use JumboUpload
   use JumboRenderers
   helpers Sinatra::Partials

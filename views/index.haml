@@ -1,7 +1,15 @@
-%form.upload{ :action => '/upload', :method => 'post', :enctype => 'multipart/form-data' }
-  %input{ :type => 'file', :name => 'file', :multiple => '' }
-  %button Upload
-  %div Upload files
+.target
+  %h2 Have at it!
+  %p Upload files here and watch them appear to the right.  You can also see other people's uploads as they arrive!
 
-%table.upload_files
-%table.download_files
+  %form.upload{ :action => '/upload', :method => 'post', :enctype => 'multipart/form-data' }
+    %input{ :type => 'file', :name => 'file', :multiple => '' }
+    %button Upload
+    %div Drag Files Here
+
+  %table.upload_files
+  %table.download_files
+
+.arrivals
+  %h4 Latest files
+  %ul

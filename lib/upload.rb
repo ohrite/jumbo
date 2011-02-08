@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'base64'
 
 class JumboUpload < Sinatra::Base
   post '/upload' do
@@ -16,28 +17,17 @@ class JumboUpload < Sinatra::Base
       return {}.to_json
     end
     
+    block = tmpfile.read
+    block_64 = Base64.encode64(block)
+
+    attrs = { :name => params[:file][:filename], :type => params[:file][:type], :size => block.length }
+
+    
     client = Faye::Client.new('http://localhost:9292/faye')
     EM.run do
-      client.publish('/files', 'filename' => name, 'message' => 'received file')
-    end
-
-    path = File.join('public', 'files', name)
-    written = 0
-    File.open(path, "wb") do |f|
-      while blk = tmpfile.read(65535)
-        f.write(blk)
-        written += blk.length
-        
-        EM.run do
-          client.publish('/files', 'filename' => name, 'message' => 'writing blocks')
-        end
-      end
+      client.publish('/files', { :data => "data:#{attrs[:type]};base64,#{block_64}" }.merge(attrs))
     end
     
-    EM.run do
-      client.publish('/files', 'filename' => name, 'message' => 'finished writing blocks')
-    end
-    
-    { :name => params[:file][:filename], :type => params[:file][:filetype], :size => written }.to_json
+    attrs.to_json
   end
 end
