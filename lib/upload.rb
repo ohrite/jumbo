@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'eventmachine'
 require 'base64'
 require 'faye'
 
@@ -23,10 +24,12 @@ class JumboUpload < Sinatra::Base
 
     attrs = { :name => params[:file][:filename], :type => params[:file][:type], :size => block.length }
 
-    env['faye.client'].publish('/files', attrs.merge({
-      :data => "data:#{attrs[:type]};base64,#{block_64}"
-    }))
-    
+    EM.run {
+      env['faye.client'].publish('/files', attrs.merge({
+        :data => "data:#{attrs[:type]};base64,#{block_64}"
+      }))
+    }
+
     attrs.to_json
   end
 end
