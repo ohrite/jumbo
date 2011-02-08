@@ -1,0 +1,7 @@
+%form.upload{ :action => '/upload', :method => 'post', :enctype => 'multipart/form-data' }
+  %input{ :type => 'file', :name => 'file', :multiple => '' }
+  %button Upload
+  %div Upload files
+
+%table.upload_files
+%table.download_files

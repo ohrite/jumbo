@@ -1,0 +1,4 @@
+#flash
+  - (session['flash'] || []).each do |k, v|
+    %div{ :title => k.to_s, :class => key }
+      =v

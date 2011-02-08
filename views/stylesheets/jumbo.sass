@@ -1,0 +1,37 @@
+@import base
+@import layout
+
+body
+  background: #f8f8f8
+
+#container
+  +box-shadow(#777, 0, 2px, 5px)
+  +border-radius(1em)
+  background: #f8f8f8
+  +linear-gradient(color-stops(#f3f3f3, #f8f8f8, #fff, #f8f8f8, #f3f3f3), left)
+
+header
+  +box-shadow(#777, 0, 2px, 5px)
+  background: #999
+  +linear-gradient(color-stops(#999, #111 50%, #333 50%, #666))
+  padding: 1em 0
+  border: 0 none
+    bottom: 1px solid #666
+    
+  h1, h3
+    margin: 0
+    color: white
+    +text-shadow(#000, 0, 0, 3px)
+
+footer
+  +border-radius(0 0 1em 1em)
+  background: #111
+  color: #fff - $font-color
+  
+  small
+    margin: 0 1em
+    
+    a
+      &, &:link
+        color: #fff - $link-color
+

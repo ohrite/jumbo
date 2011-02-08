@@ -1,0 +1,18 @@
+!!! 5
+-# http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
+-ie_tag do
+  =partial :'layouts/head'
+  %body{ :lang => 'en_US' }
+    #container
+      %header
+        =partial :'layouts/nav'
+      
+      #main{ :role => 'main' }
+        =partial :'layouts/flash'
+        =yield
+        %div{ :class => 'push' }
+      
+    %footer
+      =partial :'layouts/footer'
+      
+    =partial :'layouts/javascripts'

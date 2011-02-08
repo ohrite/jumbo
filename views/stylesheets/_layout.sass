@@ -1,0 +1,23 @@
+=half
+  left: 50%
+  width: $blueprint-container-size
+  margin-left: $blueprint-container-size / -2
+  
+#container
+  +container
+  
+header
+  h1
+    +inline-block
+    +prepend(1)
+    +span(11)
+  
+  h3
+    +inline-block
+    +span(11)
+    text-align: right
+
+footer
+  +half
+
++sticky-footer(1.5em, '#container', '.push', 'footer')
