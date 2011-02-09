@@ -31,11 +31,11 @@ $(function(){
     }
   });
   
-  var client = new Faye.Client('http://chat.ritezel.com/faye');
-  client.subscribe('/files', function(f) {
-    var link = $('<a />').html(f.name).attr({href: f.data, target: '_blank'});
-    var size = $('<span />').css('float', 'right').html((Math.round(f.size / 102.4) / 10) + "kB");
-    var info = $('<div />').html(new Date().toLocaleString());
-    $('<li />').append(link).append(size).append(info).prependTo('.arrivals ul');
-  });
+  //var client = new Faye.Client('http://chat.ritezel.com/faye');
+  // client.subscribe('/files', function(f) {
+  //     var link = $('<a />').html(f.name).attr({href: f.data, target: '_blank'});
+  //     var size = $('<span />').css('float', 'right').html((Math.round(f.size / 102.4) / 10) + "kB");
+  //     var info = $('<div />').html(new Date().toLocaleString());
+  //     $('<li />').append(link).append(size).append(info).prependTo('.arrivals ul');
+  //   });
 });
