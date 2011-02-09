@@ -25,7 +25,9 @@ class JumboUpload < Sinatra::Base
     attrs = { :name => params[:file][:filename], :type => params[:file][:type], :size => block.length }
 
     EM.run {
-      env['faye.client'].publish('/files', attrs.merge({
+      client = Faye::Client.new('http://chat.ritezel.com/faye')
+
+      client.publish('/files', attrs.merge({
         :data => "data:#{attrs[:type]};base64,#{block_64}"
       }))
     }

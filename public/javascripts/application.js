@@ -31,7 +31,7 @@ $(function(){
     }
   });
   
-  var client = new Faye.Client('/faye');
+  var client = new Faye.Client('http://chat.ritezel.com/faye');
   client.subscribe('/files', function(f) {
     var link = $('<a />').html(f.name).attr({href: f.data, target: '_blank'});
     var size = $('<span />').css('float', 'right').html((Math.round(f.size / 102.4) / 10) + "kB");
